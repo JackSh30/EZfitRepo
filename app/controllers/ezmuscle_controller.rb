@@ -1,0 +1,2 @@
+class EzmuscleController < ApplicationController
+end

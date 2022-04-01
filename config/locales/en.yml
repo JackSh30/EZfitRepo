@@ -60,3 +60,13 @@ en:
     request_contact:
       no_email: You must supply an email address
       email_sent: Thank you. We will be in touch shortly.
+
+  calendar:
+    calendar_title: Calendar
+    weight_input: "Input your current weight:"
+
+  ezmuscle:
+    ezmuscle_title: EZmuscle
+
+  gymfinder:
+    gymfinder_title: Gymfinder

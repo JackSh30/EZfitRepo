@@ -33,6 +33,11 @@ en:
   app_title: EZfit
   app_description: An app to help you on your fitness journey!
 
+  profile: My Account
+  logout: Logout
+  login: Login
+  sign_up: Create Account
+
   home:
     home:
       title: EZfit

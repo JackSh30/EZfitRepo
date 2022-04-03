@@ -29,6 +29,7 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
+#Strings to help keep code DRY
 en:
   app_title: EZfit
   app_description: An app to help you on your fitness journey!

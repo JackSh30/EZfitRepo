@@ -17,18 +17,26 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
 
+.signup {
+  font-family: sans-serif;
+  background: #f4faff;
+  width: 100%;
+  float: left;
 
-header {
+}
+
+h4 {
   background: #f4faff
 }
  .container {
-   width: 80%;
+   width: 100%;
    margin: 0 auto;
    font-family: sans-serif;
    font-weight: 700;
  }
 
  .logo {
+   margin: 0;
    float: left;
    padding: 10px 0;
    height: 100px;
@@ -48,7 +56,7 @@ header {
  nav li {
    display: inline-block;
    margin-left: 70px;
-   padding-top: 25px;
+   padding-top: 40px;
 
    position: relative;
  }

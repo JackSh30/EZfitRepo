@@ -21,7 +21,7 @@
 //var service;
 //var infowindow;
 
-let map, infoWindow, service;
+let map, infoWindow, service, locationInfo;
 
 function initMap() {
 
@@ -35,12 +35,6 @@ function initMap() {
     });
 
 
-
-
-
-
-  //service = new google.maps.places.PlacesService(map);
-  //service.nearbySearch(request, callback);
 
   const locationButton = document.createElement("button");
 
@@ -64,17 +58,40 @@ function initMap() {
           infoWindow.open(map);
           map.setCenter(pos);
 
-          var request = {
+
+
+          var request1 = {
             location: pos,
             keyword: ['gym'],
             radius: '5000',
             type: ['gym']
           };
 
+          var request2 = {
+            location: pos,
+            keyword: ['sports'],
+            radius: '5000',
+            type: ['gym']
+          };
+
+          var request3 = {
+            location: pos,
+            keyword: ['fitness'],
+            radius: '5000',
+            type: ['gym']
+          };
 
 
-          service = new google.maps.places.PlacesService(map);
-          service.nearbySearch(request, callback);
+
+
+          service1 = new google.maps.places.PlacesService(map);
+          service1.nearbySearch(request1, callback);
+
+          service2 = new google.maps.places.PlacesService(map);
+          service2.nearbySearch(request2, callback);
+
+          service3 = new google.maps.places.PlacesService(map);
+          service3.nearbySearch(request3, callback);
 
         },
         () => {
@@ -119,8 +136,11 @@ function createMarker(place) {
   });
 
   google.maps.event.addListener(marker, "click", () => {
-    infowindow.setContent(place.name || "");
-    infowindow.open(map);
+
+    locationInfo = new google.maps.InfoWindow();
+    locationInfo.setPosition(place.geometry.location);
+    locationInfo.setContent(place.name || "");
+    locationInfo.open(map);
   });
 }
 

@@ -21,4 +21,5 @@
   / The div element for the map
   #map
   / Async script executes immediately and must be after any DOM elements used in callback.
-  %script{:async => "", :src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyBDtTnanj5XDd9j8Gk8XorNMjgcP7-n_K4&callback=initMap&v=weekly"}
+  / %script{:async => "", :src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyBDtTnanj5XDd9j8Gk8XorNMjgcP7-n_K4&callback=initMap&v=weekly"}
+  %script{:async => "", :src => "https://maps.googleapis.com/maps/api/js?key=AIzaSyBDtTnanj5XDd9j8Gk8XorNMjgcP7-n_K4&libraries=places&callback=initMap&v=weekly"}

@@ -20,53 +20,49 @@
 
 
 
+var map;
+var service;
+var infowindow;
 
-let map, infoWindow;
+var a = 2;
+
 
 function initMap() {
-  map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: -34.397, lng: 150.644 },
-    zoom: 6,
-  });
-  infoWindow = new google.maps.InfoWindow();
+  var guildford = new google.maps.LatLng(51.236455,-0.578332);
 
-  const locationButton = document.createElement("button");
+  map = new google.maps.Map(document.getElementById('map'), {
+      center: guildford,
+      zoom: 13
+    });
 
-  locationButton.textContent = "Pan to Current Location";
-  locationButton.classList.add("custom-map-control-button");
-  map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
-  locationButton.addEventListener("click", () => {
-    // Try HTML5 geolocation.
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const pos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          };
+  var request = {
+    location: guildford,
+    radius: '50000',
+    type: ['gym']
+  };
 
-          infoWindow.setPosition(pos);
-          infoWindow.setContent("Location found.");
-          infoWindow.open(map);
-          map.setCenter(pos);
-        },
-        () => {
-          handleLocationError(true, infoWindow, map.getCenter());
-        }
-      );
-    } else {
-      // Browser doesn't support Geolocation
-      handleLocationError(false, infoWindow, map.getCenter());
-    }
-  });
+  service = new google.maps.places.PlacesService(map);
+  service.nearbySearch(request, callback);
 }
 
-function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-  infoWindow.setPosition(pos);
-  infoWindow.setContent(
-    browserHasGeolocation
-      ? "Error: The Geolocation service failed."
-      : "Error: Your browser doesn't support geolocation."
-  );
-  infoWindow.open(map);
+function callback(results, status) {
+  if (status == google.maps.places.PlacesServiceStatus.OK) {
+    for (var i = 0; i < results.length; i++) {
+      createMarker(results[i]);
+    }
+  }
+}
+
+function createMarker(place) {
+  if (!place.geometry || !place.geometry.location) return;
+
+  const marker = new google.maps.Marker({
+    map,
+    position: place.geometry.location,
+  });
+  infowindow = new google.maps.InfoWindow();
+  google.maps.event.addListener(marker, "click", () => {
+    infowindow.setContent(place.name || "");
+    infowindow.open(map);
+  });
 }

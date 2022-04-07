@@ -17,6 +17,78 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
 
+.signup {
+  font-family: sans-serif;
+  background: #f4faff;
+  width: 100%;
+  float: left;
+
+}
+
+h4 {
+  background: #f4faff
+}
+ .container {
+   width: 100%;
+   margin: 0 auto;
+   font-family: sans-serif;
+   font-weight: 700;
+ }
+
+ .logo {
+   margin: 0;
+   float: left;
+   padding: 10px 0;
+   height: 100px;
+   width: 250x;
+ }
+
+ nav {
+   float: right;
+ }
+
+ nav ul {
+   margin: 0;
+   padding: 0;
+   list-style: none;
+ }
+
+ nav li {
+   display: inline-block;
+   margin-left: 70px;
+   padding-top: 40px;
+
+   position: relative;
+ }
+
+ nav a {
+   color: #4f646f;
+   text-transform: none;
+ }
+
+ nav a:hover{
+   color: #b7adcf;
+ }
+
+ nav a::before {
+   content:'';
+   display: block;
+   height: 5px;
+   width: 100%;
+   background-color: #444;
+
+   position: absolute;
+   top: 0;
+   width: 0%;
+
+   transition: all ease-in-out 250ms;
+ }
+
+ nav a:hover::before {
+   width: 100%;
+ }
+
+
  $font: 'Times New Roman', 'Times', serif;
  $color: #FFFFFF;
  body {

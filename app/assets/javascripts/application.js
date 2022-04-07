@@ -17,33 +17,88 @@
 //= require turbolinks
 //= require_tree .
 
+//var map;
+//var service;
+//var infowindow;
 
-
-
-var map;
-var service;
-var infowindow;
-
-var a = 2;
-
+let map, infoWindow, service;
 
 function initMap() {
+
   var guildford = new google.maps.LatLng(51.236455,-0.578332);
+
+  infoWindow = new google.maps.InfoWindow();
 
   map = new google.maps.Map(document.getElementById('map'), {
       center: guildford,
-      zoom: 13
+      zoom: 15
     });
 
-  var request = {
-    location: guildford,
-    radius: '50000',
-    type: ['gym']
-  };
 
-  service = new google.maps.places.PlacesService(map);
-  service.nearbySearch(request, callback);
+
+
+
+
+  //service = new google.maps.places.PlacesService(map);
+  //service.nearbySearch(request, callback);
+
+  const locationButton = document.createElement("button");
+
+
+
+  locationButton.textContent = "Pan to Current Location";
+  locationButton.classList.add("custom-map-control-button");
+  map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
+  locationButton.addEventListener("click", () => {
+      // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+
+          infoWindow.setPosition(pos);
+          infoWindow.setContent("Location found.");
+          infoWindow.open(map);
+          map.setCenter(pos);
+
+          var request = {
+            location: pos,
+            keyword: ['gym'],
+            radius: '5000',
+            type: ['gym']
+          };
+
+
+
+          service = new google.maps.places.PlacesService(map);
+          service.nearbySearch(request, callback);
+
+        },
+        () => {
+          handleLocationError(true, infoWindow, map.getCenter());
+        }
+      );
+    } else {
+        // Browser doesn't support Geolocation
+      handleLocationError(false, infoWindow, map.getCenter());
+    }
+  });
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 function callback(results, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
@@ -53,6 +108,8 @@ function callback(results, status) {
   }
 }
 
+
+
 function createMarker(place) {
   if (!place.geometry || !place.geometry.location) return;
 
@@ -60,9 +117,21 @@ function createMarker(place) {
     map,
     position: place.geometry.location,
   });
-  infowindow = new google.maps.InfoWindow();
+
   google.maps.event.addListener(marker, "click", () => {
     infowindow.setContent(place.name || "");
     infowindow.open(map);
   });
+}
+
+
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  infoWindow.setPosition(pos);
+  infoWindow.setContent(
+    browserHasGeolocation
+      ? "Error: The Geolocation service failed."
+      : "Error: Your browser doesn't support geolocation."
+  );
+  infoWindow.open(map);
 }

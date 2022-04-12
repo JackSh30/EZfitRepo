@@ -21,7 +21,7 @@
 //var service;
 //var infowindow;
 
-let map, infoWindow, service, locationInfo;
+let map, infoWindow, service, locationInfo, addressInfo;
 
 function initMap() {
 
@@ -34,13 +34,9 @@ function initMap() {
       zoom: 15
     });
 
-
-
   const locationButton = document.createElement("button");
 
-
-
-  locationButton.textContent = "Pan to Current Location";
+  locationButton.textContent = "Click Here to show Nearby Gym Facilities";
   locationButton.classList.add("custom-map-control-button");
   map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
   locationButton.addEventListener("click", () => {
@@ -53,19 +49,27 @@ function initMap() {
             lng: position.coords.longitude,
           };
 
+
+          //This piece of code shows pop up box of "location found" when the button is pressed
+          /*
           infoWindow.setPosition(pos);
           infoWindow.setContent("Location found.");
           infoWindow.open(map);
+          */
           map.setCenter(pos);
 
 
 
+          // Three different search parameters as there are gyms
+          // which has different names ie Surrey Sports Centre Which has
+          // a gym.
           var request1 = {
             location: pos,
             keyword: ['gym'],
             radius: '5000',
             type: ['gym']
           };
+
 
           var request2 = {
             location: pos,
@@ -82,16 +86,16 @@ function initMap() {
           };
 
 
-
-
+          // Creating three different nearby seaches for all of our
+          // different search requests
           service1 = new google.maps.places.PlacesService(map);
           service1.nearbySearch(request1, callback);
 
-          service2 = new google.maps.places.PlacesService(map);
-          service2.nearbySearch(request2, callback);
+          //service2 = new google.maps.places.PlacesService(map);
+          service1.nearbySearch(request2, callback);
 
-          service3 = new google.maps.places.PlacesService(map);
-          service3.nearbySearch(request3, callback);
+          //service3 = new google.maps.places.PlacesService(map);
+          service1.nearbySearch(request3, callback);
 
         },
         () => {
@@ -106,19 +110,9 @@ function initMap() {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
 function callback(results, status) {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
+    console.log(results.length);
     for (var i = 0; i < results.length; i++) {
       createMarker(results[i]);
     }
@@ -130,16 +124,59 @@ function callback(results, status) {
 function createMarker(place) {
   if (!place.geometry || !place.geometry.location) return;
 
-  const marker = new google.maps.Marker({
+  marker = new google.maps.Marker({
     map,
     position: place.geometry.location,
   });
 
+  const requestInfo = {
+    placeId: place.place_id,
+    fields: ["name", "formatted_address"]
+  };
+
+
+
+  function callbackDetails(place){
+    //console.log(addressInfo);
+
+    if (status == google.maps.places.PlacesServiceStatus.OK); //return;
+      if (place.formatted_address) {
+        //address = place.formatted_address;
+        addressInfo = place.formatted_address;
+        console.log(`${place.formatted_address}.`);
+        console.log(addressInfo);
+        return addressInfo;
+      }
+  }
+
+
+  service1.getDetails(requestInfo, callbackDetails)
+
   google.maps.event.addListener(marker, "click", () => {
+
+    infoContent =
+    '<div id="content">' +
+    '<div id="siteNotice">' +
+    "</div>" +
+    '<h3 id="firstHeading" class="firstHeading">' +
+    place.name +
+    '</h1>' +
+    '<div id="bodyContent">' +
+    "<p>" +
+    addressInfo +
+    ".</p>" +
+    '<p>Google maps link to location, <a href="https://www.google.com/maps/place/?q=place_id:' +
+    place.place_id +
+    '">' +
+    "Click here</a> " +
+    ".</p>" +
+    "</div>" +
+    "</div>";
 
     locationInfo = new google.maps.InfoWindow();
     locationInfo.setPosition(place.geometry.location);
-    locationInfo.setContent(place.name || "");
+    locationInfo.setContent((infoContent));
+
     locationInfo.open(map);
   });
 }

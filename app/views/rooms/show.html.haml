@@ -1,0 +1,30 @@
+%h1
+  = @room.name
+.row
+  .col-12.col-md-3
+    = render partial: 'rooms'
+  .col
+    .chat
+      - @room_messages.each do |room_message|
+        .chat-message-container
+          .row.no-gutters
+            .col-auto.text-center
+              %img.avatar{:alt => "", :src => gravatar_url(room_message.user)}/
+            .col
+              .message-content
+                %p.mb-1
+                  = room_message.message
+                .text-right
+                  %small
+                    = room_message.created_at
+    = simple_form_for @room_message, remote: true do |form|
+      .input-group.mb-3
+        = form.input :message, as: :string, |
+          wrapper: false,                   |
+          label: false,                     |
+          input_html: {                     |
+            class: 'chat-input'             |
+          }                                 |
+        .input-group-append
+          = form.submit "Send", class: 'btn btn-primary chat-input'
+      = form.input :room_id, as: :hidden

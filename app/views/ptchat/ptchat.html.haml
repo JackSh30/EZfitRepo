@@ -1,0 +1,13 @@
+%head
+  %title RailsChatTutorial
+  = csrf_meta_tags
+  = csp_meta_tag
+  = stylesheet_link_tag    'application', media: 'all'
+  = javascript_include_tag 'application'
+%body
+  .container
+    .row
+      .col-12
+        = render partial: 'rooms/room_navbar'
+        .my-3
+          = yield

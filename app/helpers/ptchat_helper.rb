@@ -1,0 +1,2 @@
+module PtchatHelper
+end

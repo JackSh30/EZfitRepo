@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
+  resources :room_messages
+  resources :rooms
   devise_for :users
   root 'home#home'
 
-  #get 'ptchat', to: ''
+  get 'ptchat', to: 'rooms#index'
   get 'ezmuscle', to: 'ezmuscle#ezmuscle'
 
   get 'calendar', to: 'calendar#calendar'

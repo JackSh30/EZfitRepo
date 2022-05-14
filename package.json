@@ -2,4 +2,7 @@
   "name": "EZfitApp",
   "private": true,
   "dependencies": {}
+  "scripts": {
+   "start": "node index.js"
+  }
 }

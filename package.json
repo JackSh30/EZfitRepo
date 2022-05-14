@@ -1,7 +1,7 @@
 {
   "name": "EZfitApp",
   "private": true,
-  "dependencies": {}
+  "dependencies": {},
   "scripts": {
     "dev": "react-scripts start",
     "start": "serve -s build",

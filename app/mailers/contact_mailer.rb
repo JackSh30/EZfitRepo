@@ -6,4 +6,10 @@ class ContactMailer < ApplicationMailer
     @message = message
     mail cc: @email
   end
+
+  def welcome_email
+    @user = params[:user]
+    @url  = 'https://ezfit-fitness.herokuapp.com/users/sign_in'
+    mail(to: @user.email, subject: 'Welcome to EZfit!')
+  end
 end

@@ -33,6 +33,8 @@
 en:
   app_title: EZfit
   app_description: An app to help you on your fitness journey!
+  agree: "You must agree to the terms and conditions before creating an account. Please tick if you agree to the"
+  tsandcs: terms and conditions
 
   profile: My Account
   logout: Logout
@@ -41,8 +43,16 @@ en:
 
   home:
     home:
+      termsandconds: "Terms and Conditions:"
       title: EZfit
       welcome: Welcome to EZfit!
+      before: "Before creating an account please read the following terms and conditions:"
+      rule1: When using the EZfit application, you consent to sharing your location, weight, and email address.
+      rule2: We cannot guarantee the accuracy, timeliness, performance, completeness or suitability of the information and materials found or offered by this application for any particular purpose.
+      rule3: Your use of any information or materials on this website is entirely at your own risk, for which we shall not be liable.
+      rule4: This website contains material which is owned by or licensed to us. This material includes, but is not limited to, the design, layout, look, appearance and graphics. Reproduction is prohibited other than in accordance with the copyright notice.
+      rule5: You must refrain from using vulgar language or sharing any inappropriate content when using the personal trainer chat. Your account may be terminated if you are found to have breached this term.
+      rule6: The developers cannot be held accountable for any accident or injury obtained as a result of using this application.
 
     contact:
       title: Contact Us

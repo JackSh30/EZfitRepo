@@ -22,6 +22,21 @@
 //var service;
 //var infowindow;
 
+//Function to enable a account to be created only if a checkbox is ticked,
+//confirming the user agrees to the terms and conditions.
+$(document).on('turbolinks:load', function() {
+  $('#form_submit').hide();
+  $('#tsandcsCheck').click(function() {
+    if ($(this).is(':checked')) {
+            $('#form_submit').show(); //enable input
+
+        } else {
+            $('#form_submit').hide(); //disable input
+        }
+  });
+});
+
+
 let map, infoWindow, service, locationInfo, addressInfo;
 
 function initMap() {

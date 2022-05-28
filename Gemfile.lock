@@ -49,7 +49,7 @@ GEM
     arel (9.0.0)
     autoprefixer-rails (10.4.7.0)
       execjs (~> 2)
-    bcrypt (3.1.17)
+    bcrypt (3.1.18)
     bindex (0.8.1)
     bootsnap (1.11.1)
       msgpack (~> 1.2)
@@ -119,7 +119,7 @@ GEM
     google-api-client (0.53.0)
       google-apis-core (~> 0.1)
       google-apis-generator (~> 0.1)
-    google-apis-core (0.4.2)
+    google-apis-core (0.5.0)
       addressable (~> 2.5, >= 2.5.1)
       googleauth (>= 0.16.2, < 2.a)
       httpclient (>= 2.8.1, < 3.a)
@@ -164,7 +164,7 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
-    jquery-rails (4.4.0)
+    jquery-rails (4.5.0)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
@@ -184,7 +184,7 @@ GEM
     mini_mime (1.1.2)
     minitest (5.15.0)
     modernizr-rails (2.7.1)
-    msgpack (1.5.1)
+    msgpack (1.5.2)
     multi_json (1.15.0)
     multipart-post (2.1.1)
     nio4r (2.5.8)
@@ -197,7 +197,7 @@ GEM
     public_suffix (4.0.7)
     puma (3.12.6)
     racc (1.6.0)
-    rack (2.2.3)
+    rack (2.2.3.1)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.2.8)
@@ -233,8 +233,8 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redis (4.6.0)
-    regexp_parser (2.4.0)
-    representable (3.1.1)
+    regexp_parser (2.5.0)
+    representable (3.2.0)
       declarative (< 0.1.0)
       trailblazer-option (>= 0.1.1, < 0.2.0)
       uber (< 0.2.0)
@@ -343,4 +343,4 @@ RUBY VERSION
    ruby 2.5.9p229
 
 BUNDLED WITH
-   2.3.13
+   2.3.14
